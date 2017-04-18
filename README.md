@@ -1,9 +1,14 @@
-# api documentation for  [cpx (v1.5.0)](https://github.com/mysticatea/cpx)  [![npm package](https://img.shields.io/npm/v/npmdoc-cpx.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-cpx) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-cpx.svg)](https://travis-ci.org/npmdoc/node-npmdoc-cpx)
+# npmdoc-cpx
+
+#### api documentation for  [cpx (v1.5.0)](https://github.com/mysticatea/cpx)  [![npm package](https://img.shields.io/npm/v/npmdoc-cpx.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-cpx) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-cpx.svg)](https://travis-ci.org/npmdoc/node-npmdoc-cpx)
+
 #### Copy file globs, watching for changes.
 
-[![NPM](https://nodei.co/npm/cpx.png?downloads=true)](https://www.npmjs.com/package/cpx)
+[![NPM](https://nodei.co/npm/cpx.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/cpx)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-cpx/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-cpx_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-cpx/build/apidoc.html)
+- [https://npmdoc.github.io/node-npmdoc-cpx/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-cpx/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-cpx/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-cpx/build/apidoc.html)
 
 ![npmPackageListing](https://npmdoc.github.io/node-npmdoc-cpx/build/screenCapture.npmPackageListing.svg)
 
@@ -91,13 +96,11 @@
     "main": "lib/index.js",
     "maintainers": [
         {
-            "name": "mysticatea",
-            "email": "star.ctor@gmail.com"
+            "name": "mysticatea"
         }
     ],
     "name": "cpx",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/mysticatea/cpx.git"
@@ -118,180 +121,6 @@
     },
     "version": "1.5.0"
 }
-```
-
-
-
-# <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
-
-#### [module cpx](#apidoc.module.cpx)
-1.  [function <span class="apidocSignatureSpan">cpx.</span>Cpx (source, outDir, options)](#apidoc.element.cpx.Cpx)
-1.  [function <span class="apidocSignatureSpan">cpx.</span>copy (source, outDir)](#apidoc.element.cpx.copy)
-1.  [function <span class="apidocSignatureSpan">cpx.</span>copySync (source, outDir)](#apidoc.element.cpx.copySync)
-1.  [function <span class="apidocSignatureSpan">cpx.</span>watch (source, outDir)](#apidoc.element.cpx.watch)
-
-
-
-# <a name="apidoc.module.cpx"></a>[module cpx](#apidoc.module.cpx)
-
-#### <a name="apidoc.element.cpx.Cpx"></a>[function <span class="apidocSignatureSpan">cpx.</span>Cpx (source, outDir, options)](#apidoc.element.cpx.Cpx)
-- description and source-code
-```javascript
-function Cpx(source, outDir, options) {
-    (0, _classCallCheck3.default)(this, Cpx);
-
-    options = options || {}; // eslint-disable-line no-param-reassign
-
-    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Cpx).call(this));
-
-    _this[SOURCE] = normalizePath(source);
-    _this[OUT_DIR] = normalizePath(outDir);
-    _this[DEREFERENCE] = Boolean(options.dereference);
-    _this[INCLUDE_EMPTY_DIRS] = Boolean(options.includeEmptyDirs);
-    _this[INITIAL_COPY] = options.initialCopy === undefined || Boolean(options.initialCopy);
-    _this[PRESERVE] = Boolean(options.preserve);
-    _this[TRANSFORM] = [].concat(options.transform).filter(Boolean);
-    _this[UPDATE] = Boolean(options.update);
-    _this[QUEUE] = new Queue();
-    _this[BASE_DIR] = null;
-    _this[WATCHER] = null;
-    return _this;
-}
-```
-- example usage
-```shell
-n/a
-```
-
-#### <a name="apidoc.element.cpx.copy"></a>[function <span class="apidocSignatureSpan">cpx.</span>copy (source, outDir)](#apidoc.element.cpx.copy)
-- description and source-code
-```javascript
-function copy(source, outDir) {
-    var options = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
-    var cb = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
-
-    if (typeof options === "function") {
-<span class="apidocCodeCommentSpan">        /* eslint-disable no-param-reassign */
-</span>        cb = options;
-        options = null;
-        /* eslint-enable no-param-reassign */
-    }
-
-    var cpx = new Cpx(source, outDir, options);
-    if (options && options.clean) {
-        cpx.clean(function (err) {
-            if (err == null) {
-                cpx.copy(cb);
-            } else if (cb != null) {
-                cb(err);
-            }
-        });
-    } else {
-        cpx.copy(cb);
-    }
-
-    return cpx;
-}
-```
-- example usage
-```shell
-...
-'''js
-var cpx = require("cpx");
-'''
-
-### cpx.copy
-
-'''ts
-cpx.copy(source, dest, options, callback)
-cpx.copy(source, dest, callback)
-'''
-
-- **source** '{string}' -- A file glob of copy targets.
-- **dest** '{string}' -- A file path of a destination directory.
-- **options** '{object}'
-- **options.clean** '{boolean}' -- The flag to remove files that copied on past before copy. Default: 'false'.
-...
-```
-
-#### <a name="apidoc.element.cpx.copySync"></a>[function <span class="apidocSignatureSpan">cpx.</span>copySync (source, outDir)](#apidoc.element.cpx.copySync)
-- description and source-code
-```javascript
-function copySync(source, outDir) {
-    var options = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
-
-    var cpx = new Cpx(source, outDir, options);
-    if (options && options.clean) {
-        cpx.cleanSync();
-    }
-    cpx.copySync();
-}
-```
-- example usage
-```shell
-...
-- **callback** '{(err: Error|null) => void}' -- A function that is called at done.
-
-Copy files that matches with 'source' glob to 'dest' directory.
-
-### cpx.copySync
-
-'''ts
-cpx.copySync(source, dest, options)
-cpx.copySync(source, dest)
-'''
-
-A synchronous function of 'cpx.copy'.
-
-Arguments is almost same as 'cpx.copy'.
-But 'options.transform' is not supported.
-...
-```
-
-#### <a name="apidoc.element.cpx.watch"></a>[function <span class="apidocSignatureSpan">cpx.</span>watch (source, outDir)](#apidoc.element.cpx.watch)
-- description and source-code
-```javascript
-function watch(source, outDir) {
-    var options = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
-
-    var cpx = new Cpx(source, outDir, options);
-    if (options && options.clean) {
-        cpx.clean(function (err) {
-            if (err == null) {
-                cpx.watch();
-            } else {
-                cpx.emit("watch-error", err);
-            }
-        });
-    } else {
-        cpx.watch();
-    }
-
-    return cpx;
-}
-```
-- example usage
-```shell
-...
-
-- **source** '{string}' -- A file glob of copy targets.
-- **dest** '{string}' -- A file path of a destination directory.
-- **options** '{object}'
-  - **options.clean** '{boolean}' -- The flag to remove files that copied on past before copy. Default: 'false'.
-  - **options.dereference** '{boolean}' -- The flag to follow symbolic links when copying from them. Default: 'false'.
-  - **options.includeEmptyDirs** '{boolean}' -- The flag to copy empty directories which is matched with the glob. Default: 'false
-'.
-  - **options.initialCopy** '{boolean}' -- The flag to not copy at the initial time of watch. This is for 'cpx.watch()'. Default
-: 'true'.
-  - **options.preserve** '{boolean}' -- The flag to copy uid, gid, atime, and mtime of files. Default: 'false'.
-  - **options.transform** '{((filepath: string) => stream.Transform)[]}' -- Functions that creates a 'stream.Transform' object to
- transform each copying file.
-  - **options.update** '{boolean}' -- The flag to not overwrite files on destination if the source file is older. Default: 'false
-'.
-- **callback** '{(err: Error|null) => void}' -- A function that is called at done.
-
-Copy files that matches with 'source' glob to 'dest' directory.
-...
 ```
 
 
