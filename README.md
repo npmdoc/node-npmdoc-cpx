@@ -1,6 +1,6 @@
 # npmdoc-cpx
 
-#### api documentation for  [cpx (v1.5.0)](https://github.com/mysticatea/cpx)  [![npm package](https://img.shields.io/npm/v/npmdoc-cpx.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-cpx) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-cpx.svg)](https://travis-ci.org/npmdoc/node-npmdoc-cpx)
+#### basic api documentation for  [cpx (v1.5.0)](https://github.com/mysticatea/cpx)  [![npm package](https://img.shields.io/npm/v/npmdoc-cpx.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-cpx) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-cpx.svg)](https://travis-ci.org/npmdoc/node-npmdoc-cpx)
 
 #### Copy file globs, watching for changes.
 
